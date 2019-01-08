@@ -1,135 +1,175 @@
-"use strict";
-
 /*****************
 
-Circle Eater
-Pippin Barr
+Circle Eater Activity
+Mattie KA
 
-A simple game in which the player controls a shrinking circle with their mouse and tries
-to overlap another circle (food) in order to grow bigger.
+Circle that eats things i guess
 
 ******************/
 
-// Constants defining key quantities
-const AVATAR_SIZE_GAIN = 50;
-const AVATAR_SIZE_LOSS = 1;
+"use strict";
 
-// Avatar is an object defined by its properties
+/******************************************************************************
+                              SECTION NAME
+******************************************************************************/
+
+
+/******************************************************************************
+                                VARIABLES
+******************************************************************************/
+
 let avatar = {
   x: 0,
   y: 0,
-  maxSize: 64,
-  size: 64,
-  active: true,
-  color: '#cccc55'
-}
+  maxSize: 100,
+  currentSize: 60,
+  isPlayerAlive: true,
+  color: "#cc99ff"
+};
 
-// Food is an object defined by its properties
 let food = {
   x: 0,
   y: 0,
-  size: 64,
-  color: '#55cccc'
-}
+  vx: 1,
+  vy: 1,
+  size: 30,
+  color: "#00ccff"
+};
 
-// preload()
-//
-// Not needed
+let vxOffset = 0.0;
+let vyOffset = 0.0;
 
-function preload() {
+const GROW = 25;
+const SHRINK = 0.5;
+const FOOD_MAX_SPEED = 20;
 
-}
-
-
-// setup()
-//
-// Create the canvas, position the food, remove the cursor
+/******************************************************************************
+                                  SETUP
+******************************************************************************/
 
 function setup() {
-  createCanvas(windowWidth,windowHeight);
-  positionFood();
+  createCanvas(800,500);
+  resetFood();
   noCursor();
 }
 
-
-// draw()
-//
-// Move the avatar, check for collisions, display avatar and food
+/******************************************************************************
+                                    DRAW
+******************************************************************************/
 
 function draw() {
-  // Make sure the avatar is still alive - if not, we don't run
-  // the rest of the draw loop
-  if (!avatar.active) {
-    // By using "return" the draw() function exits immediately
-    return;
+  background("#000066");
+  if (avatar.isPlayerAlive === true) {
+    updatePlayerPosition();
+    updateFood();
+    checkCollision();
+    displayAvatar();
+    displayFood();
+  } else if (avatar.isPlayerAlive === false) {
+    deathText();
   }
 
-  // Otherwise we handle the game
-  background(0);
-  updateAvatar();
-  checkCollision();
-  displayAvatar();
-  displayFood();
+
 }
 
-// updateAvatar()
-//
-// Set the position to the mouse location
-// Shrink the avatar
-// Set it to inactive if it reaches a size of zero
-function updateAvatar() {
+/******************************************************************************
+                                  FUNCTIONS
+******************************************************************************/
+
+//UPDATE PLAYER POSITION----------------------------------------
+function updatePlayerPosition() {
   avatar.x = mouseX;
   avatar.y = mouseY;
-  // Shrink the avatar and use constrain() to keep it to reasonable bounds
-  avatar.size = constrain(avatar.size - AVATAR_SIZE_LOSS,0,avatar.maxSize);
-  if (avatar.size === 0) {
-    avatar.active = false;
+  avatar.currentSize = avatar.currentSize - SHRINK;
+  avatar.currentSize = constrain(avatar.currentSize,0,avatar.maxSize);
+  if (avatar.currentSize === 0) {
+    avatar.isPlayerAlive = false;
+  }
+  else {
+    avatar.isPlayerAlive = true;
   }
 }
 
-// checkCollision()
-//
-// Calculate distance of avatar to food
-// Check if the distance is small enough to be an overlap of the two circles
-// If so, grow the avatar and reposition the food
-function checkCollision() {
-  let d = dist(avatar.x,avatar.y,food.x,food.y);
-  if (d < avatar.size/2 + food.size/2) {
-    avatar.size = constrain(avatar.size + AVATAR_SIZE_GAIN,0,avatar.maxSize);
-    positionFood();
-  }
-}
-
-// displayAvatar()
-//
-// Draw the avatar in its current position, using its size and color
-// Use push() and pop() around it all to avoid affecting the rest of the program
-// with drawing commands
+//DISPLAY AVATAR ---------------------------------------
 function displayAvatar() {
   push();
-  noStroke();
-  fill(avatar.color);
-  ellipse(avatar.x,avatar.y,avatar.size);
+    noStroke();
+    fill(avatar.color);
+    ellipse(avatar.x,avatar.y,avatar.currentSize,avatar.currentSize);
   pop();
 }
 
-// displayFood()
-//
-// Draw the food in its current position, using its size and color
-// Use push() and pop() around it all to avoid affecting the rest of the program
-// with drawing commands
+//UPDATE FOOD -----------------------------------------------
+function updateFood() {
+  //screen wrapping x
+  if (food.x <= 0) {
+    food.x = width-1;
+  } else if (food.x >= width) {
+    food.x = 1;
+  }
+
+  //screen wrapping y
+  if (food.y <=0) {
+    food.y = height-1;
+  } else if (food.y >= height) {
+    food.y = 1;
+  }
+
+  //update food velocity
+  vxOffset = vxOffset + 0.1;
+  vyOffset = vyOffset + 0.2;
+
+  food.vx = map(noise(vxOffset),0,1,-FOOD_MAX_SPEED,FOOD_MAX_SPEED);
+  food.vx = constrain(food.vx,-FOOD_MAX_SPEED,FOOD_MAX_SPEED);
+
+  food.vy = map(noise(vyOffset),0,1,-FOOD_MAX_SPEED,FOOD_MAX_SPEED);
+  food.vy = constrain(food.vy,-FOOD_MAX_SPEED,FOOD_MAX_SPEED);
+
+  //update food position
+  food.x = food.x + food.vx;
+  food.y = food.y + food.vy;
+
+}
+
+//DISPLAY FOOD --------------------------------------------
 function displayFood() {
   push();
-  noStroke();
-  fill(food.color);
-  ellipse(food.x,food.y,food.size);
+    noStroke();
+    fill(food.color);
+    ellipse(food.x,food.y,food.size,food.size);
   pop();
 }
 
-// positionFood()
-//
-// Set the food's position properties to random numbers within the canvas dimensions
-function positionFood() {
+//CHECK COLLISION -------------------------------------------
+function checkCollision() {
+  let distance = dist(avatar.x,avatar.y,food.x,food.y);
+  if (distance < avatar.currentSize/2 + food.size/2) {
+    avatar.currentSize = avatar.currentSize + GROW;
+    avatar.currentSize = constrain(avatar.currentSize + GROW,0,avatar.maxSize);
+    console.log(avatar.currentSize);
+    resetFood();
+  }
+  else {
+    //nothing
+  }
+}
+
+//RESET FOOD POSITION ---------------------------------
+function resetFood() {
   food.x = random(0,width);
   food.y = random(0,height);
 }
+
+//DEATH TEXT -------------------------------------------
+function deathText() {
+  push();
+    textSize(32);
+    fill("#ff3300");
+    textAlign(CENTER);
+    text("You Died ):",width/2,height/2);
+  pop();
+}
+
+/******************************************************************************
+                                    END
+******************************************************************************/

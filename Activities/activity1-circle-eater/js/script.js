@@ -34,8 +34,8 @@ let food = {
   color: "#00ccff"
 };
 
-const grow = 25;
-const shrink = 0.5;
+const GROW = 25;
+const SHRINK = 0.5;
 
 /******************************************************************************
                                   SETUP
@@ -73,7 +73,7 @@ function draw() {
 function updatePlayerPosition() {
   avatar.x = mouseX;
   avatar.y = mouseY;
-  avatar.currentSize = avatar.currentSize - shrink;
+  avatar.currentSize = avatar.currentSize - SHRINK;
   avatar.currentSize = constrain(avatar.currentSize,0,avatar.maxSize);
   if (avatar.currentSize === 0) {
     avatar.isPlayerAlive = false;
@@ -105,9 +105,9 @@ function displayFood() {
 function checkCollision() {
   let distance = dist(avatar.x,avatar.y,food.x,food.y);
   if (distance < avatar.currentSize/2 + food.size/2) {
-    avatar.currentSize = avatar.currentSize + grow;
-    console.log(avatar.currentSize);
+    avatar.currentSize = avatar.currentSize + GROW;
     avatar.currentSize = constrain(avatar.currentSize + grow,0,avatar.maxSize);
+    console.log(avatar.currentSize);
     resetFood();
   }
   else {
