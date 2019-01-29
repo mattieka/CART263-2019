@@ -3,3 +3,17 @@
 This is the style file for this project.
 
 **********************************************/
+
+#counter,#shelf {
+  float: left;
+}
+
+.listForm {
+  font-size: 2em;
+}
+
+.gridForm {
+  font-size: 2em;
+  padding: 10px;
+  color: red;
+}

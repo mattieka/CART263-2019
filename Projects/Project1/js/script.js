@@ -13,10 +13,44 @@ Have you ever wondered what it's like to work in video game retail and to have t
                                 VARIABLES
 ******************************************************************************/
 
+let $counter;
+let $shelf;
+
+$(document).ready(setup);
 
 /******************************************************************************
                                   SETUP
 ******************************************************************************/
 
+function setup() {
+  $counter = $('#counter');
+  $shelf = $('#shelf');
+  allowConnection();
+  addToShelf();
+}
 
-$(document).ready(setup);
+/******************************************************************************
+                              ALLOW CONNECTION
+******************************************************************************/
+
+function allowConnection() {
+  $counter.sortable({
+    connectWith: ".connectedSortable"
+  }).disableSelection();
+  $shelf.sortable({
+    connectWith: ".connectedSortable"
+  }).disableSelection();
+}
+
+/******************************************************************************
+                                SHELF DROPPABLE
+******************************************************************************/
+
+function addToShelf() {
+  $shelf.droppable({
+    drop: function(event,ui) {
+      ui.draggable.attr("class","gridForm");
+      console.log(ui.draggable.attr("class"));
+    }
+  })
+}
