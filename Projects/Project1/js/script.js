@@ -27,6 +27,7 @@ function setup() {
   $shelf = $('#shelf');
   allowConnection();
   addToShelf();
+  addToCounter();
 }
 
 /******************************************************************************
@@ -54,3 +55,15 @@ function addToShelf() {
     }
   })
 }
+
+/******************************************************************************
+                              COUNTER DROPPABLE
+******************************************************************************/
+ function addToCounter() {
+   $counter.droppable({
+     drop: function(event,ui) {
+       ui.draggable.attr("class","listForm");
+       console.log(ui.draggable.attr("class"));
+     }
+   })
+ }
