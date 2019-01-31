@@ -8,6 +8,11 @@ This is the style file for this project.
   float: left;
 }
 
+#shelf {
+  padding-left: 10%;
+  max-width: 50%;
+}
+
 .listForm {
   font-size: 2em;
 }
@@ -16,4 +21,9 @@ This is the style file for this project.
   font-size: 2em;
   padding: 10px;
   color: red;
+  width: 100px;
+  height: 90px;
+  float: left;
+  border: 3px solid #eee;
+  text-align: center;
 }
