@@ -15,6 +15,7 @@ Have you ever wondered what it's like to work in video game retail and to have t
 
 let $counter;
 let $shelf;
+let waitTime;
 
 $(document).ready(setup);
 
@@ -28,7 +29,19 @@ function setup() {
   allowConnection();
   addToShelf();
   addToCounter();
+  setInterval(generateWaitTime,1000);
+
+  $('#instructionsDialog').dialog({
+    modal: true,
+    buttons: {
+      OK: function() {
+        $(this).dialog("close");
+        setInterval(newGameDiv,waitTime)
+      }
+    }
+  })
 }
+
 
 /******************************************************************************
                               ALLOW CONNECTION
@@ -52,6 +65,8 @@ function addToShelf() {
     drop: function(event,ui) {
       ui.draggable.attr("class","gridForm");
       console.log(ui.draggable.attr("class"));
+
+      console.log(waitTime);
     }
   })
 }
@@ -67,3 +82,20 @@ function addToShelf() {
      }
    })
  }
+
+ /******************************************************************************
+                          RANDOM NUMBER FOR INTERVAL
+ ******************************************************************************/
+
+function generateWaitTime() {
+  waitTime = Math.floor(Math.random() * (7000-1000)) + 1000;
+}
+
+/******************************************************************************
+                                  NEW GAME DIV
+******************************************************************************/
+
+function newGameDiv() {
+  let $newGame = $('<li class="listForm">NextGame</li>');
+  $counter.append($newGame);
+}
