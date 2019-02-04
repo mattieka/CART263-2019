@@ -9,8 +9,8 @@ Have you ever wondered what it's like to work in video game retail and to have t
 ******************************************************************************/
 
 What the player does:
-- User can move "games" from the pile on the counter (normal list) to the shelf (grid list)
-- and vice versa
+- *DONE!* User can move "games" from the pile on the counter (normal list) to the shelf (grid list)
+- *DONE!* and vice versa
 
 The user's goal:
 - To alphabetize the games on the pile on the counter
@@ -19,7 +19,7 @@ Obstacles stopping the user:
 - "Customers" putting things back in the wrong place
 - "Customers" who won't shut up
 - "Customers" who also happen to be toddlers who knock an entire shelf off the wall while running through the store
-- More games getting added to the list
+- *DONE* More games getting added to the list
 
 Gameplay:
 - user drags and drops games from the list to the grid and is told to alphabetize them
@@ -33,4 +33,8 @@ Gameplay:
                                 TO-DO LIST
 ******************************************************************************/
 
-1) 
+1) Make Game List
+2) Make Customer Dialog Box Generator
+3) Add SFX
+4) Improve visuals
+5) Remove X from dialog boxes

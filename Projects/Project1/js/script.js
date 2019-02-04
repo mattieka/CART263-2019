@@ -66,7 +66,7 @@ function addToShelf() {
       ui.draggable.attr("class","gridForm");
       console.log(ui.draggable.attr("class"));
 
-      console.log(waitTime);
+      //console.log(waitTime);
     }
   })
 }
@@ -97,5 +97,7 @@ function generateWaitTime() {
 
 function newGameDiv() {
   let $newGame = $('<li class="listForm">NextGame</li>');
+  console.log(waitTime)
   $counter.append($newGame);
+
 }
