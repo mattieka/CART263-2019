@@ -33,8 +33,8 @@ Gameplay:
                                 TO-DO LIST
 ******************************************************************************/
 
-1) Make Game List
+1) *DONE!* Make Game List
 2) Make Customer Dialog Box Generator
 3) Add SFX
-4) Improve visuals
-5) Remove X from dialog boxes
+4) *DONE!* Improve visuals
+5) *DONE!* Remove X from dialog boxes

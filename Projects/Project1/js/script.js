@@ -31,6 +31,7 @@ function setup() {
   addToShelf();
   addToCounter();
   setInterval(generateWaitTime,10);
+
   $.get("/gamesList.txt", function(data){
     gameListArray = data.split("\n");
     console.log(gameListArray);
@@ -46,6 +47,7 @@ function setup() {
       OK: function() {
         $(this).dialog("close");
         setInterval(newGameDiv,waitTime)
+        setInterval(generateDialog,5000);
       }
     }
   })
@@ -117,6 +119,14 @@ function newGameDiv() {
                             BRING UP NEW DIALOG BOX
 ******************************************************************************/
 
+function generateDialog() {
+  let $dialogText = $("#dialogText");
+  $dialogText.append("sjdofijgoidjfgodfijgdoifjg");
+  $dialogText.dialog({
+        //autoOpen: false,
+        modal: true
+      })
+  }
 
 /******************************************************************************
                                   SOURCES
