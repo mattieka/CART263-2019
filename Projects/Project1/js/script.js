@@ -15,7 +15,7 @@ Have you ever wondered what it's like to work in video game retail and to have t
 
 let $counter;
 let $shelf;
-let waitTime;
+let waitTime = 1000;
 let gameListArray = [];
 
 $(document).ready(setup);
@@ -30,12 +30,12 @@ function setup() {
   allowConnection();
   addToShelf();
   addToCounter();
-  setInterval(generateWaitTime,1000);
+  setInterval(generateWaitTime,10);
   $.get("/gamesList.txt", function(data){
     gameListArray = data.split("\n");
     console.log(gameListArray);
     $("li p").each(function(){
-      $(this).text(gameListArray[Math.floor(Math.random() * gameListArray.length)])
+      $(this).text(gameListArray[Math.floor(Math.random() * gameListArray.length-1)])
     })
 });
 
@@ -99,7 +99,7 @@ function addToShelf() {
  ******************************************************************************/
 
 function generateWaitTime() {
-  waitTime = Math.floor(Math.random() * (7000-1000)) + 1000;
+  waitTime = Math.floor(Math.random() * (5000-1000) + 1000);
 }
 
 /******************************************************************************
@@ -109,7 +109,6 @@ function generateWaitTime() {
 function newGameDiv() {
   let $nextTitle = (gameListArray[Math.floor(Math.random() * gameListArray.length-1)]);
   let $newGame = $('<li class="listForm"><p class="spineText">'+$nextTitle+'</p></li>');
-  console.log(waitTime)
   $counter.append($newGame);
 
 }
