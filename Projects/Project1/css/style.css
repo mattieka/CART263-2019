@@ -4,6 +4,14 @@ This is the style file for this project.
 
 **********************************************/
 
+ul li {
+  list-style: none;
+}
+
+.no-close .ui-dialog-titlebar-close {
+  display: none;
+}
+
 #counter,#shelf {
   float: left;
 }

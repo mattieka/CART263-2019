@@ -33,6 +33,7 @@ function setup() {
 
   $('#instructionsDialog').dialog({
     modal: true,
+    dialogClass: "no-close",
     buttons: {
       OK: function() {
         $(this).dialog("close");
