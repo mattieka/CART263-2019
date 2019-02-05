@@ -23,15 +23,44 @@ ul li {
 
 .listForm {
   width: 300px;
-  border: 3px solid #eee;
+  border: 2px solid green;
+  background-image: url("/assets/images/gameSpine.png");
+  background-size: 100%;
+  height: 19px;
+  text-align: right;
+  font-size: 0.8em;
+  font-family: sans-serif;
+  font-weight: bold;
+  margin-bottom: 1px;
+}
+
+p {
+  margin: 0;
+  padding: 0;
 }
 
 .gridForm {
-  padding: 10px;
-  color: red;
-  width: 100px;
-  height: 90px;
+  font-size: .9em;
+  font-family: sans-serif;
+  font-weight: bold;
+  padding:10px;
+  margin-top:10px;
+  margin-right: 10px;
+  color: black;
+  width: 85px;
+  height: 100px;
   float: left;
-  border: 3px solid #eee;
+  border: 3px solid black;
   text-align: center;
+  background-image: url("/assets/images/gameCover.jpg");
+  background-size: 100%;
+}
+
+.coverText {
+  margin-top: 15px;
+}
+
+.spineText {
+  margin-right: 29px;
+  margin-top: 2px;
 }

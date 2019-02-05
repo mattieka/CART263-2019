@@ -34,12 +34,10 @@ function setup() {
   $.get("/gamesList.txt", function(data){
     gameListArray = data.split("\n");
     console.log(gameListArray);
-    $("li").each(function(){
+    $("li p").each(function(){
       $(this).text(gameListArray[Math.floor(Math.random() * gameListArray.length)])
     })
 });
-
-
 
   $('#instructionsDialog').dialog({
     modal: true,
@@ -75,6 +73,7 @@ function addToShelf() {
   $shelf.droppable({
     drop: function(event,ui) {
       ui.draggable.attr("class","gridForm");
+      ui.draggable.find("p").removeClass("spineText").addClass("coverText");
       console.log(ui.draggable.attr("class"));
 
       //console.log(waitTime);
@@ -89,6 +88,7 @@ function addToShelf() {
    $counter.droppable({
      drop: function(event,ui) {
        ui.draggable.attr("class","listForm");
+       ui.draggable.find("p").removeClass("coverText").addClass("spineText");
        console.log(ui.draggable.attr("class"));
      }
    })
@@ -103,13 +103,26 @@ function generateWaitTime() {
 }
 
 /******************************************************************************
-                                  NEW GAME DIV
+                            NEW GAME LIST ITEM
 ******************************************************************************/
 
 function newGameDiv() {
-  let $nextTitle = (gameListArray[Math.floor(Math.random() * gameListArray.length)]);
-  let $newGame = $('<li class="listForm">'+$nextTitle+'</li>');
+  let $nextTitle = (gameListArray[Math.floor(Math.random() * gameListArray.length-1)]);
+  let $newGame = $('<li class="listForm"><p class="spineText">'+$nextTitle+'</p></li>');
   console.log(waitTime)
   $counter.append($newGame);
 
 }
+
+/******************************************************************************
+                            BRING UP NEW DIALOG BOX
+******************************************************************************/
+
+
+/******************************************************************************
+                                  SOURCES
+******************************************************************************/
+/*
+Game Case Front: http://www.canbum.net/cdn/18/1991/949/xbox-game-cover-template_134936.jpg
+Game Case Spine: http://www.canbum.net/cdn/18/1991/949/xbox-360-game-cover-template_134914.png
+*/
