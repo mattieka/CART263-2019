@@ -34,7 +34,7 @@ Gameplay:
 ******************************************************************************/
 
 1) *DONE!* Make Game List
-2) Make Customer Dialog Box Generator
-3) Add SFX
+2) *DONE!* Make Customer Dialog Box Generator
+3) *DONE!* Add SFX
 4) *DONE!* Improve visuals
 5) *DONE!* Remove X from dialog boxes

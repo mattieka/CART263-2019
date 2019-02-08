@@ -17,6 +17,8 @@ let $counter;
 let $shelf;
 let waitTime = 1000;
 let gameListArray = [];
+let stackSFX = new Audio ("assets/sounds/gameOnCounter.wav");
+let shelfSFX = new Audio ("assets/sounds/moveGame.wav");
 
 $(document).ready(setup);
 
@@ -30,7 +32,6 @@ function setup() {
   allowConnection();
   addToShelf();
   addToCounter();
-  setInterval(generateWaitTime,10);
 
   $.get("/gamesList.txt", function(data){
     gameListArray = data.split("\n");
@@ -46,13 +47,12 @@ function setup() {
     buttons: {
       OK: function() {
         $(this).dialog("close");
-        setInterval(newGameDiv,waitTime)
-        setInterval(generateDialog,5000);
+        newGameDiv();
+        generateDialog();
       }
     }
   })
 }
-
 
 /******************************************************************************
                               ALLOW CONNECTION
@@ -77,7 +77,7 @@ function addToShelf() {
       ui.draggable.attr("class","gridForm");
       ui.draggable.find("p").removeClass("spineText").addClass("coverText");
       console.log(ui.draggable.attr("class"));
-
+      shelfSFX.play();
       //console.log(waitTime);
     }
   })
@@ -92,6 +92,7 @@ function addToShelf() {
        ui.draggable.attr("class","listForm");
        ui.draggable.find("p").removeClass("coverText").addClass("spineText");
        console.log(ui.draggable.attr("class"));
+       shelfSFX.play();
      }
    })
  }
@@ -99,10 +100,11 @@ function addToShelf() {
  /******************************************************************************
                           RANDOM NUMBER FOR INTERVAL
  ******************************************************************************/
-
-function generateWaitTime() {
-  waitTime = Math.floor(Math.random() * (5000-1000) + 1000);
-}
+//
+// function generateWaitTime() {
+//   waitTime = Math.floor(Math.random() * (5000-1000) + 1000);
+//   return waitTime;
+// }
 
 /******************************************************************************
                             NEW GAME LIST ITEM
@@ -112,6 +114,8 @@ function newGameDiv() {
   let $nextTitle = (gameListArray[Math.floor(Math.random() * gameListArray.length-1)]);
   let $newGame = $('<li class="listForm"><p class="spineText">'+$nextTitle+'</p></li>');
   $counter.append($newGame);
+  stackSFX.play();
+  setTimeout(newGameDiv, Math.random() * 6000);
 
 }
 
@@ -121,12 +125,21 @@ function newGameDiv() {
 
 function generateDialog() {
   let $dialogText = $("#dialogText");
-  $dialogText.append("sjdofijgoidjfgodfijgdoifjg");
+  $dialogText.append("A customer needs your attention!");
   $dialogText.dialog({
         //autoOpen: false,
-        modal: true
-      })
-  }
+        modal: true,
+        dialogClass: "no-close",
+        buttons: {
+          OK: function() {
+            $dialogText.dialog("close");
+            $dialogText.empty();
+      }
+    }
+  })
+
+  setTimeout(generateDialog, Math.random() * 7000);
+}
 
 /******************************************************************************
                                   SOURCES
