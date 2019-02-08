@@ -155,6 +155,11 @@ function generateDialog() {
 Set Timeout function for random time learned from here:
 https://stackoverflow.com/questions/34656758/javascript-setinterval-with-random-time
 
+Sound effects: https://opengameart.org/content/item-handling
 Game Case Front: http://www.canbum.net/cdn/18/1991/949/xbox-game-cover-template_134936.jpg
 Game Case Spine: http://www.canbum.net/cdn/18/1991/949/xbox-360-game-cover-template_134914.png
 */
+
+/******************************************************************************
+                                  END
+******************************************************************************/
