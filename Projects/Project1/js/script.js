@@ -41,7 +41,7 @@ function setup() {
   addToCounter();
 
 // loads list of games from text file into an array, then pulls 5 random titles from that list and loads them into the <p> tag of each list item of the five default games.
-  $.get("js/gamesList.txt", function(data){
+  $.get("/js/gamesList.txt", function(data){
     gameListArray = data.split("\n");
     $("li p").each(function(){
       $(this).text(gameListArray[Math.floor(Math.random() * gameListArray.length-1)])
