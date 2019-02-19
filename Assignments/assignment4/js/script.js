@@ -6,7 +6,7 @@ Eat Up
 Mattie KA
 
 Using jQuery UI's draggable and droppable methods to
-feed a hungry mouth!
+feed a hungry mouth! Or attempt to give it something it hates!
 
 Sounds:
 Buzzing: https://freesound.org/people/soundmary/sounds/194931/
@@ -47,10 +47,10 @@ function setup() {
   $fly.draggable();
 
   // Start up the buzzing of the fly
-  buzzSFX.loop = true;
-  buzzSFX.play();
-
-
+  $fly.on('mousedown',function() {
+    buzzSFX.loop = true;
+    buzzSFX.play();
+  })
 
 ////// COOKIE STUFF
   $cookie = $('#cookie');
