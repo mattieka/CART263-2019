@@ -11,6 +11,7 @@ feed a hungry mouth!
 Sounds:
 Buzzing: https://freesound.org/people/soundmary/sounds/194931/
 Chewing: https://freesound.org/people/InspectorJ/sounds/412068/
+Rejection: https://opengameart.org/content/goblin-death
 
 Cookie picture; https://opengameart.org/content/cookie-0
 
@@ -19,6 +20,7 @@ Cookie picture; https://opengameart.org/content/cookie-0
 // Sound effects for the experience
 let buzzSFX = new Audio("assets/sounds/buzz.mp3");
 let crunchSFX = new Audio("assets/sounds/crunch.wav");
+let rejectSFX = new Audio("assets/sounds/reject.wav");
 
 // Variable to hold our two key elements
 let $mouth;
@@ -33,8 +35,11 @@ function setup() {
   // Make it droppable
   $mouth.droppable({
     // The drop option specifies a function to call when a drop is completed
+    accept: "#fly",
     drop: flyDropped
   });
+
+/////// FLY STUFF
 
   // Get the fly element from the page
   $fly = $('#fly');
@@ -44,6 +49,23 @@ function setup() {
   // Start up the buzzing of the fly
   buzzSFX.loop = true;
   buzzSFX.play();
+
+
+
+////// COOKIE STUFF
+  $cookie = $('#cookie');
+  $cookie.draggable({
+    revert: "invalid",
+    start: function(event,ui) {
+      rejectSFX.loop = true;
+      rejectSFX.play();
+    },
+    stop: function(event,ui){
+      rejectSFX.pause()
+    }
+  });
+
+
 }
 
 // flyDropped(event,ui)
