@@ -4,8 +4,8 @@ Meter that goes from (: to ): , "lose " if you hit ):
 
 To-Do
 - *DONE!* Basic Setup and Commenting Structure
-- Set up happy/fear meter
-- Game over state
+- *DONE!* Set up mood meter
+- *DONE!* Game over state
 - Collect video titles/thumbnail images
 - Get automated voice for video titles
 - Set up fake youtube screen
