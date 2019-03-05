@@ -41,6 +41,8 @@ function meterTest() {
   let $meterUp = $("#meterUp");
   let $meterDown = $("#meterDown");
 
+  meterColorCheck();
+
   $meterUp.click(function() {
     if (moodMeter < 4) {
       moodMeter = moodMeter + 1;
@@ -49,7 +51,7 @@ function meterTest() {
       gameState = "win";
       gameOver();
     }
-
+    meterColorCheck();
     console.log(moodMeter);
   });
 
@@ -61,7 +63,7 @@ function meterTest() {
       gameState = "lose";
       gameOver();
     }
-
+    meterColorCheck();
     console.log(moodMeter);
   });
 
@@ -78,6 +80,64 @@ function gameOver() {
     console.log("You lose!!");
   }
 }
+
+
+/******************************************************************************
+                              METER COLOR CHECK
+******************************************************************************/
+
+function meterColorCheck() {
+  if (moodMeter >= 3) {
+    $("#3").attr('src', "assets/images/metergreen.png");
+  } else {
+    $("#3").attr('src', "assets/images/meterneutral.png");
+  }
+
+  if (moodMeter == 2) {
+    $("#2").attr('src','assets/images/metercyan.png');
+  } else {
+    $("#2").attr('src',"assets/images/meterneutral.png");
+  }
+
+  if (moodMeter == 1) {
+    $("#1").attr('src','assets/images/metercyan.png');
+  } else {
+    $("#1").attr('src',"assets/images/meterneutral.png");
+  }
+
+  if (moodMeter == 0) {
+    $("#0").attr('src','assets/images/metermid.png');
+  } else {
+    $("#0").attr('src',"assets/images/meterneutral.png");
+  }
+
+  if (moodMeter == -1) {
+    $("#-1").attr('src',"assets/images/meteryellow.png");
+  } else {
+    $("#-1").attr('src',"assets/images/meterneutral.png");
+  }
+
+  if (moodMeter == -2) {
+    $("#-2").attr('src',"assets/images/meteryellow.png");
+  } else {
+    $("#-2").attr('src',"assets/images/meterneutral.png");
+  }
+
+  if (moodMeter <= -3) {
+    $("#-3").attr('src',"assets/images/meterred.png");
+  } else {
+    $("#-3").attr('src',"assets/images/meterneutral.png");
+  }
+
+}
+
+/******************************************************************************
+                            IMAGE/SOUND CREDIT
+******************************************************************************
+
+Happy/Sad faces: https://openclipart.org/user-detail/Technaturally
+
+**/
 
 /******************************************************************************
                                   END
