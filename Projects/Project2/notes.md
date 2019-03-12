@@ -6,11 +6,13 @@ To-Do
 - *DONE!* Basic Setup and Commenting Structure
 - *DONE!* Set up mood meter
 - *DONE!* Game over state
-- Collect video titles/thumbnail images
-- Get automated voice for video titles
-- Set up fake youtube screen
+- *DONE! IT WAS THE WORST EXPERIENCE OF MY LIFE!* Collect video titles/thumbnail images
+- Get automated voice for video titles/explanations
+- *DONE!* Set up fake youtube screen
 - Place assets
 - Randomize "next video" and "related videos"
 - Add sounds?
+- popup for player instructions
+- blur titles of videos
 
 Bugs
