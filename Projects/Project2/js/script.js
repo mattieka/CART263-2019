@@ -20,13 +20,29 @@ let gameState = "play";
 ******************************************************************************/
 
 // Run preload when document is fully loaded
-$(document).ready(meterTest);
+$(document).ready(loadData);
 
 /******************************************************************************
                                 PRELOAD
 ******************************************************************************/
 
+function loadData() {
+  $.getJSON("data/related.json",dataLoaded);
+}
 
+/******************************************************************************
+                                DATA LOADED
+******************************************************************************/
+
+function dataLoaded(data) {
+  console.log(data.length);
+  let upnext;
+  $(".relatedImage").each(function(){
+    let randomNextImage = data[Math.floor(Math.random()*data.length)].imageurl;
+    console.log(randomNextImage);
+    $(this).attr('src',randomNextImage);
+  })
+}
 
 /******************************************************************************
                             MOOD METER TEST

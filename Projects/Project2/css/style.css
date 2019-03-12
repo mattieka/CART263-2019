@@ -5,7 +5,12 @@ This is the style file for this project.
 **********************************************/
 
 .faces {
-  max-width: 75px;
+  width: 75px;
+  max-width: 10vw;
+}
+
+.meter {
+  max-width: 10vw;
 }
 
 #topBar, #topBarImage {
@@ -17,6 +22,7 @@ This is the style file for this project.
 
 #meterAndVideoContainer {
   display: flex;
+  max-width: 100vw;
 }
 
 #meterContainer {
@@ -24,9 +30,8 @@ This is the style file for this project.
 }
 
 #videoPlayer, #videoPlayerImage {
-
-  max-width: 90vw;
-  max-height: auto;
+  width: 500px;
+  min-width: 60vw;
   margin-top: 0.5%;
   margin-left: 2%;
 }
@@ -34,6 +39,14 @@ This is the style file for this project.
 #relatedVidsContainer {
   margin-left: 2.5%;
   margin-top: 0.7%;
+  max-width: 10vw;
+}
+
+.relatedImageContainer, .relatedImage {
+  max-width: 20vw;
+  width:20vw;
+  margin-top: 1%;
+  margin-bottom: 1%;
 }
 
 #autoPlayContainer {
@@ -43,5 +56,6 @@ This is the style file for this project.
   border-right:0px;
   border-color: lightgrey;
   border-style: solid;
+  margin-bottom: 2%;
 
 }
