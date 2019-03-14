@@ -1,114 +1,133 @@
 [
   {
     "imageurl":"assets/images/screenshots/upnext/upnext1.png",
+    "playerurl": "assets/images/screenshots/nowplaying/nowplaying1.png",
     "tag":"good",
     "explanation":"This nursery rhyme video is harmless to kids."
   },
 
   {
     "imageurl":"assets/images/screenshots/upnext/upnext2.png",
+    "playerurl": "assets/images/screenshots/nowplaying/nowplaying2.png",
     "tag":"bad",
     "explanation":"This mishmash of characters from different sources behaving strangely is unsettling."
   },
 
   {
     "imageurl":"assets/images/screenshots/upnext/upnext3.png",
+    "playerurl": "assets/images/screenshots/nowplaying/nowplaying3.png",
     "tag":"bad",
     "explanation":"This mix of cartoon and realism has an uncanny valley sort of feel that may upset kids."
   },
 
   {
     "imageurl":"assets/images/screenshots/upnext/upnext4.png",
+    "playerurl": "assets/images/screenshots/nowplaying/nowplaying4.png",
     "tag":"verybad",
     "explanation":"Although slime videos are not uncommon, the presence of syringes may be highly upsetting to young kids."
   },
 
   {
     "imageurl":"assets/images/screenshots/upnext/upnext5.png",
+    "playerurl": "assets/images/screenshots/nowplaying/nowplaying5.png",
     "tag":"nochange",
     "explanation":"This video may seem unsettling to adults, but is harmless enough to young kids."
   },
 
   {
     "imageurl":"assets/images/screenshots/upnext/upnext6.png",
+    "playerurl": "assets/images/screenshots/nowplaying/nowplaying6.png",
     "tag":"good",
     "explanation":"This video of unwrapping surprise eggs is harmless."
   },
 
   {
     "imageurl":"assets/images/screenshots/upnext/upnext7.png",
+    "playerurl": "assets/images/screenshots/nowplaying/nowplaying7.png",
     "tag":"good",
     "explanation":"This video of unwrapping surprise eggs is harmless."
   },
 
   {
     "imageurl":"assets/images/screenshots/upnext/upnext8.png",
+    "playerurl": "assets/images/screenshots/nowplaying/nowplaying8.png",
     "tag":"verygood",
     "explanation":"This recording of a Paw Patrol concert is fun for young fans to watch."
   },
 
   {
     "imageurl":"assets/images/screenshots/upnext/upnext9.png",
+    "playerurl": "assets/images/screenshots/nowplaying/nowplaying9.png",
     "tag":"nochange",
     "explanation":"This mishmash of characters from different sources is unsettling, but there is no strange or alarming behavior."
   },
 
   {
     "imageurl":"assets/images/screenshots/upnext/upnext10.png",
+    "playerurl": "assets/images/screenshots/nowplaying/nowplaying10.png",
     "tag":"verygood",
     "explanation":"This is an official trailer for a Paw Patrol movie from an official source."
   },
 
   {
     "imageurl":"assets/images/screenshots/upnext/upnext11.png",
+    "playerurl": "assets/images/screenshots/nowplaying/nowplaying11.png",
     "tag":"bad",
     "explanation":"This stopmotion video with off-model but familiar characters interacting with a gloved hand is fairly unsettling."
   },
 
   {
     "imageurl":"assets/images/screenshots/upnext/upnext12.png",
+    "playerurl": "assets/images/screenshots/nowplaying/nowplaying12.png",
     "tag":"verybad",
     "explanation":"This is the least unsettling screenshot in this video, which is a playthrough of disney characters with graphic injuries or illnesses."
   },
 
   {
     "imageurl":"assets/images/screenshots/upnext/upnext13.png",
+    "playerurl": "assets/images/screenshots/nowplaying/nowplaying13.png",
     "tag":"bad",
     "explanation":"Kids may find videos/games of their favorite disney characters having babies at least a little unsettling."
   },
 
   {
     "imageurl":"assets/images/screenshots/upnext/upnext14.png",
+    "playerurl": "assets/images/screenshots/nowplaying/nowplaying14.png",
     "tag":"verybad",
     "explanation":"Even though slime videos are popular, there is a massive, albeit fake, spider in a popular kids' character's stomach."
   },
 
   {
     "imageurl":"assets/images/screenshots/upnext/upnext15.png",
+    "playerurl": "assets/images/screenshots/nowplaying/nowplaying15.png",
     "tag":"verygood",
     "explanation":"This is an official Teen Titans Go episode from an official source."
   },
 
   {
     "imageurl":"assets/images/screenshots/upnext/upnext16.png",
+    "playerurl": "assets/images/screenshots/nowplaying/nowplaying16.png",
     "tag":"nochange",
     "explanation":"Watching the reassembly of Teen Titans characters' faces is weird but mostly harmless."
   },
 
   {
     "imageurl":"assets/images/screenshots/upnext/upnext17.png",
+    "playerurl": "assets/images/screenshots/nowplaying/nowplaying17.png",
     "tag":"bad",
     "explanation":"Toys representing characters from a young kids' show are being crushed under the wheels of a toy car. This may be upsetting to very young kids."
   },
 
   {
     "imageurl":"assets/images/screenshots/upnext/upnext18.png",
+    "playerurl": "assets/images/screenshots/nowplaying/nowplaying18.png",
     "tag":"good",
     "explanation":"Slime videos like this are harmless."
   },
 
   {
     "imageurl":"assets/images/screenshots/upnext/upnext19.png",
+    "playerurl": "assets/images/screenshots/nowplaying/nowplaying19.png",
     "tag":"verygood",
     "explanation":"Although not from an official source, this DIY video of a Frozen-themed dollhouse is fun for kids to watch."
   }

@@ -14,6 +14,9 @@ Navigate YouTube as it is in the current internet climate as a child. Unable to 
 
 let moodMeter = 0;
 let gameState = "play";
+let randomNextImage;
+let upNextIndex;
+let currentIndex;
 
 /******************************************************************************
                                   SETUP
@@ -27,6 +30,7 @@ $(document).ready(loadData);
 ******************************************************************************/
 
 function loadData() {
+  meterColorCheck();
   $.getJSON("data/related.json",dataLoaded);
 }
 
@@ -36,12 +40,76 @@ function loadData() {
 
 function dataLoaded(data) {
   console.log(data.length);
-  let upnext;
   $(".relatedImage").each(function(){
-    let randomNextImage = data[Math.floor(Math.random()*data.length)].imageurl;
-    console.log(randomNextImage);
+    upNextIndex = Math.floor(Math.random()*data.length);
+    console.log(upNextIndex);
+    randomNextImage = data[upNextIndex].imageurl;
+    $(this).attr('id',upNextIndex);
     $(this).attr('src',randomNextImage);
-  })
+    $(this).click(function() {
+      console.log($(this).attr('id'));
+      currentIndex = $(this).attr('id');
+      $("#videoPlayerImage").attr('src',data[currentIndex].playerurl);
+      adjustMoodMeter(data);
+      console.log(data[currentIndex].explanation);
+      reloadVideos();
+    })
+  });
+}
+
+
+/******************************************************************************
+                            MOOD METER ADJUST
+******************************************************************************/
+//adjust mood meter based on last video "watched"
+function adjustMoodMeter(data) {
+  console.log(currentIndex);
+  if (moodMeter < 4 && data[currentIndex].tag == "verygood") {
+    moodMeter = moodMeter + 2;
+    console.log(moodMeter);
+  } else if (moodMeter >= 4) {
+    gameState = "win";
+    gameOver();
+  }
+
+  if (moodMeter < 4 && data[currentIndex].tag == "good") {
+    moodMeter = moodMeter + 1;
+    console.log(moodMeter);
+  } else if (moodMeter >= 4) {
+    gameState = "win";
+    gameOver();
+  }
+
+  if (gameState == "play" && data[currentIndex].tag == "nochange") {
+
+  }
+
+  if (moodMeter > -4 && data[currentIndex].tag == "bad") {
+    moodMeter = moodMeter - 1;
+  } else if (moodMeter <= -4) {
+    // when mood meter hits -4, game is lost. set game state and run gameOver function
+    gameState = "lose";
+    gameOver();
+  }
+
+  if (moodMeter > -4 && data[currentIndex].tag == "verybad") {
+    moodMeter = moodMeter - 2;
+  } else if (moodMeter <= -4) {
+    // when mood meter hits -4, game is lost. set game state and run gameOver function
+    gameState = "lose";
+    gameOver();
+  }
+
+  meterColorCheck();
+}
+
+/******************************************************************************
+                            RELOAD VIDEOS
+******************************************************************************/
+
+function reloadVideos() {
+  $(".relatedImage").attr("id","null");
+  loadData();
 }
 
 /******************************************************************************
