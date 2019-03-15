@@ -57,5 +57,9 @@ This is the style file for this project.
   border-color: lightgrey;
   border-style: solid;
   margin-bottom: 2%;
+}
 
+#warningLink {
+  font-family: sans-serif;
+  font-size: .5em;
 }

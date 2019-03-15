@@ -23,7 +23,40 @@ let currentIndex;
 ******************************************************************************/
 
 // Run preload when document is fully loaded
-$(document).ready(loadData);
+$(document).ready(function() {
+  $("#warningBox").dialog({
+    autoOpen: false,
+    modal: true,
+    buttons: {
+      "Okay": function() {
+        $(this).dialog("close");
+        $("#warningLink").hide();
+      }
+    }
+  });
+  $("#instructionsBox").dialog({
+    buttons: {
+      "Okay": function() {
+        $(this).dialog("close");
+      }
+    },
+    modal: true
+  });
+  $("#gameOverDialog").dialog({
+    autoOpen: false,
+    modal: true,
+    dialogClass: "no-close",
+    buttons: {
+      "Start Over.": function() {
+        moodMeter = 0;
+        $(this).dialog("close");
+        $("#videoPlayerImage").attr('src',"assets/images/screenshots/display/firstvideo.png");
+        reloadVideos();
+      }
+    }
+  })
+  loadData();
+});
 
 /******************************************************************************
                                 PRELOAD
@@ -39,7 +72,9 @@ function loadData() {
 ******************************************************************************/
 
 function dataLoaded(data) {
-  console.log(data.length);
+  $("#warningLink").click(function() {
+    $("#warningBox").dialog("open");
+  })
   $(".relatedImage").each(function(){
     upNextIndex = Math.floor(Math.random()*data.length);
     console.log(upNextIndex);
@@ -158,10 +193,14 @@ function meterTest() {
 ******************************************************************************/
 
 function gameOver() {
-  if (gameState == "win") {
+    if (gameState == "win") {
     console.log("You win!!");
+    $("#gameOverDialog").dialog("open");
+    $("#gameOverDialog").text("You successfully avoided too much harmful content.");
   } else if (gameState == "lose") {
     console.log("You lose!!");
+    $("#gameOverDialog").dialog("open");
+    $("#gameOverDialog").text("You were unable to avoid harmful content.");
   }
 }
 
