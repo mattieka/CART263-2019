@@ -7,12 +7,12 @@ To-Do
 - *DONE!* Set up mood meter
 - *DONE!* Game over state
 - *DONE! IT WAS THE WORST EXPERIENCE OF MY LIFE!* Collect video titles/thumbnail images
-- Get automated voice for video titles/explanations
+- *DONE!* Get automated voice for video titles/explanations
 - *DONE!* Set up fake youtube screen
 - *DONE!* Place assets
 - *DONE!* Randomize "next video" and "related videos"
-- Add sounds?
+- Artist statement
 - *DONE!* popup for player instructions
-- blur titles of videos
+- *DONE!* blur titles of videos
 
 Bugs

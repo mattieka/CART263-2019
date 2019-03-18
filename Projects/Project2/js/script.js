@@ -24,6 +24,9 @@ let currentIndex;
 
 // Run preload when document is fully loaded
 $(document).ready(function() {
+
+  // warning dialog box for content warning.
+  // It doesn't appear unless the user clicks on the text "click for content warning"
   $("#warningBox").dialog({
     autoOpen: false,
     modal: true,
@@ -34,6 +37,9 @@ $(document).ready(function() {
       }
     }
   });
+
+  // instructions dialog box to tell users what to do.
+  // appears automatically when the page loads.
   $("#instructionsBox").dialog({
     buttons: {
       "Okay": function() {
@@ -42,6 +48,8 @@ $(document).ready(function() {
     },
     modal: true
   });
+
+  // game over dialog box. appears if player wins or loses, and resets the mood meter, default video player image, and reloads a fresh set of videos.
   $("#gameOverDialog").dialog({
     autoOpen: false,
     modal: true,
@@ -62,6 +70,7 @@ $(document).ready(function() {
                                 PRELOAD
 ******************************************************************************/
 
+// gets json data
 function loadData() {
   meterColorCheck();
   $.getJSON("data/related.json",dataLoaded);
@@ -72,21 +81,27 @@ function loadData() {
 ******************************************************************************/
 
 function dataLoaded(data) {
+  // allows content warning dialog box to pop up if user clicks "click for content warnings"
   $("#warningLink").click(function() {
     $("#warningBox").dialog("open");
   })
+
+  // randomizes the related videos by picking one from the json data and changing the id and image src to reflect the one that was chosen.
   $(".relatedImage").each(function(){
     upNextIndex = Math.floor(Math.random()*data.length);
     console.log(upNextIndex);
     randomNextImage = data[upNextIndex].imageurl;
     $(this).attr('id',upNextIndex);
     $(this).attr('src',randomNextImage);
+
+    // triggers when user clicks on a related video. retrieves the id of the one clicked and changes the video player image to reflect that choice. the mood meter is then adjusted, and voice synthesis commands retrieve the "tag" (good, bad, very good, very bad, or no change) and explanation, then says them out loud. The related videos are then reloaded.
     $(this).click(function() {
       console.log($(this).attr('id'));
       currentIndex = $(this).attr('id');
       $("#videoPlayerImage").attr('src',data[currentIndex].playerurl);
       adjustMoodMeter(data);
-      console.log(data[currentIndex].explanation);
+      setTimeout(responsiveVoice.speak(data[currentIndex].tag,"UK English Male"),100);
+      setTimeout(responsiveVoice.speak(data[currentIndex].explanation, "UK English Male"),1000);
       reloadVideos();
     })
   });
@@ -115,7 +130,7 @@ function adjustMoodMeter(data) {
     gameOver();
   }
 
-  if (gameState == "play" && data[currentIndex].tag == "nochange") {
+  if (gameState == "play" && data[currentIndex].tag == "no change") {
 
   }
 
@@ -191,16 +206,16 @@ function meterTest() {
 /******************************************************************************
                               GAME OVER STATE
 ******************************************************************************/
-
+// when the moodmeter reaches its minimum or maximum, a change in win state occurs. a dialog box pops up to inform the player, then gives them the option to start over.
 function gameOver() {
     if (gameState == "win") {
     console.log("You win!!");
     $("#gameOverDialog").dialog("open");
-    $("#gameOverDialog").text("You successfully avoided too much harmful content.");
+    $("#gameOverDialog").text("You win. You successfully avoided too much harmful content.");
   } else if (gameState == "lose") {
     console.log("You lose!!");
     $("#gameOverDialog").dialog("open");
-    $("#gameOverDialog").text("You were unable to avoid harmful content.");
+    $("#gameOverDialog").text("You lose. You were unable to avoid harmful content.");
   }
 }
 
@@ -208,6 +223,7 @@ function gameOver() {
 /******************************************************************************
                               METER COLOR CHECK
 ******************************************************************************/
+//controls the colour of the mood meter based on current number of points.
 
 function meterColorCheck() {
   if (moodMeter >= 3) {
@@ -255,11 +271,10 @@ function meterColorCheck() {
 }
 
 /******************************************************************************
-                            IMAGE/SOUND CREDIT
+                              IMAGE CREDIT
 ******************************************************************************
 
 Happy/Sad faces: https://openclipart.org/user-detail/Technaturally
-
 **/
 
 /******************************************************************************

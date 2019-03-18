@@ -30,7 +30,7 @@
   {
     "imageurl":"assets/images/screenshots/upnext/upnext5.png",
     "playerurl": "assets/images/screenshots/nowplaying/nowplaying5.png",
-    "tag":"nochange",
+    "tag":"no change",
     "explanation":"This video may seem unsettling to adults, but is harmless enough to young kids."
   },
 
@@ -58,7 +58,7 @@
   {
     "imageurl":"assets/images/screenshots/upnext/upnext9.png",
     "playerurl": "assets/images/screenshots/nowplaying/nowplaying9.png",
-    "tag":"nochange",
+    "tag":"no change",
     "explanation":"This mishmash of characters from different sources is unsettling, but there is no strange or alarming behavior."
   },
 
@@ -87,7 +87,7 @@
     "imageurl":"assets/images/screenshots/upnext/upnext13.png",
     "playerurl": "assets/images/screenshots/nowplaying/nowplaying13.png",
     "tag":"bad",
-    "explanation":"Kids may find videos/games of their favorite disney characters having babies at least a little unsettling."
+    "explanation":"Kids may find videos or games of their favorite disney characters having babies at least a little unsettling."
   },
 
   {
@@ -107,7 +107,7 @@
   {
     "imageurl":"assets/images/screenshots/upnext/upnext16.png",
     "playerurl": "assets/images/screenshots/nowplaying/nowplaying16.png",
-    "tag":"nochange",
+    "tag":"no change",
     "explanation":"Watching the reassembly of Teen Titans characters' faces is weird but mostly harmless."
   },
 
