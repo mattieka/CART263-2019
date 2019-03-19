@@ -49,19 +49,43 @@ function gotData(data) {
     verb = 'are';
   }
 
+
   // Now the cat
   let cat = getRandomElement(data.cats);
 
   // Same again for room
   let room = getRandomElement(data.rooms);
+  let roomArticle = "a"
+  let roomFirstCharacter = room.charAt(0);
+  if (vowels.indexOf(roomFirstCharacter) !== -1) {
+    roomArticle = "an";
+  }
+  // get a random emoji
+  let emoji = getRandomElement(data.emoji);
+
+  // get a random fabric/materal
+  let fabric = getRandomElement(data.technicalfabrics);
+  let fabricArticle = "a"
+  let fabricFirstCharacter = fabric.charAt(0);
+  if (vowels.indexOf(fabricFirstCharacter) !== -1) {
+    fabricArticle = "an";
+  }
+
+  // get random clothing element
+  let clothes = getRandomElement(data.clothes);
+  if (clothes.charAt(clothes.length - 1) === "s" && clothes.charAt(clothes.length - 2) !== "s") {
+    fabricArticle = "";
+  }
 
   // Now we can construct our description with a template string
   // We have the basic structure of a sentence and we substitute in the
   // values we've just calculated
-  let description = `${condiment} ${verb} like a ${cat} in a ${room}.`;
+  let description = `${emoji} ${condiment} ${verb} like a ${cat} wearing ${fabricArticle} ${fabric} ${clothes} in ${roomArticle} ${room} ${emoji}`;
 
   // Finally, we add it to the page and hey presto!
-  $('body').append(description)
+  $('body').append(description);
+  $(document).on("click", function() {
+    location.reload()});
 }
 
 // getRandomElement ()
