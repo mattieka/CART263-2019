@@ -21,6 +21,8 @@ const config = {
   type: Phaser.AUTO,
   width: 800,
   height: 600,
+  zoom: 3,
+  pixelArt: true,
   parent: "game-container",
   scene: {
     preload: preload,
@@ -44,10 +46,12 @@ const config = {
 const game = new Phaser.Game(config);
 
 //player variable
+
 let player;
 
+
 //max player speed
-let speed = 100;
+let speed = 60;
 
 /*****************************************************************************
                                   PRELOAD
@@ -85,6 +89,9 @@ function create() {
   const background = testMap.createStaticLayer("background", cityTileset,0 ,0);
   const blockedTiles = testMap.createStaticLayer("blockedTiles", cityTileset,0,0);
   blockedTiles.setCollisionByProperty({collides:true});
+
+  const objectsLayer = testMap.createFromObjects("objectsLayer", "items", {key: 'Type'});
+
 
   //PLAYER STUFF
   // set player starting position and have it obey game's physics
@@ -156,19 +163,19 @@ function update(time, delta) {
 
   //vertical movement
   if (this.cursors.up.isDown) {
-    player.body.setVelocityY(-100);
+    player.body.setVelocityY(-speed);
     player.anims.play('up',true);
   } else if (this.cursors.down.isDown) {
-    player.body.setVelocityY(100);
+    player.body.setVelocityY(speed);
     player.anims.play('down',true);
   }
 
   //horizontal movement
   if (this.cursors.left.isDown) {
-    player.body.setVelocityX(-100);
+    player.body.setVelocityX(-speed);
     player.anims.play('left',true);
   } else if (this.cursors.right.isDown) {
-    player.body.setVelocityX(100);
+    player.body.setVelocityX(speed);
     player.anims.play('right',true);
   }
 
