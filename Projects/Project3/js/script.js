@@ -32,6 +32,7 @@ const config = {
   physics: {
     default: "arcade",
     arcade: {
+      debug: true,
       gravity: {y:0}
     }
   }
@@ -45,10 +46,13 @@ const config = {
 // game uses parameters set in config
 const game = new Phaser.Game(config);
 
+
+const GRIDSIZE = 16;
 //player variable
 
 let player;
-
+  let currentAniFrame;
+  let currentAnimation;
 
 //max player speed
 let speed = 60;
@@ -62,7 +66,7 @@ function preload() {
 //load tiles (png sheets)
   this.load.image("indoorTiles", "assets/images/indoorTiles.png");
   this.load.image("cityTiles", "assets/images/cityTiles.png");
-  this.load.tilemapTiledJSON("testMap","assets/tilemaps/actualtestmap.json");
+  this.load.tilemapTiledJSON("mainMap","assets/tilemaps/mainMap.json");
 
   //load player sprites
   this.load.spritesheet("fyveDown","assets/sprites/fyve/down/fyveDownSheet.png",{frameWidth:16,frameHeight:16});
@@ -79,18 +83,21 @@ function preload() {
 function create() {
   //MAP STUFF
   // constant to store map
-  const testMap = this.make.tilemap({key: "testMap"});
+  const mainMap = this.make.tilemap({key: "mainMap"});
 
   // constants for tilesets
-  const indoorTileset = testMap.addTilesetImage("inside","indoorTiles");
-  const cityTileset = testMap.addTilesetImage("outside", "cityTiles");
+  const indoorTileset = mainMap.addTilesetImage("indoorTiles","indoorTiles");
+  const cityTileset = mainMap.addTilesetImage("cityTiles", "cityTiles");
 
   // info about layers in tiled
-  const background = testMap.createStaticLayer("background", cityTileset,0 ,0);
-  const blockedTiles = testMap.createStaticLayer("blockedTiles", cityTileset,0,0);
-  blockedTiles.setCollisionByProperty({collides:true});
+  const floor = mainMap.createStaticLayer("floor", cityTileset,0 ,0);
+  const walls = mainMap.createStaticLayer("walls", cityTileset,0,0);
+  const belowPlayer = mainMap.createStaticLayer("belowPlayer",indoorTileset,0,0);
+  const abovePlayer = mainMap.createStaticLayer("abovePlayer",indoorTileset,0,0);
+  walls.setCollisionByProperty({solid:true});
 
-  const objectsLayer = testMap.createFromObjects("objectsLayer", "items", {key: 'Type'});
+
+  //const objectsLayer = mainMap.createFromObjects("objectsLayer", "items", {key: 'Type'});
 
 
   //PLAYER STUFF
@@ -134,17 +141,17 @@ function create() {
   this.cursors = this.input.keyboard.createCursorKeys();
 
   // check for collisions
-  this.physics.add.collider(player,blockedTiles);
+  this.physics.add.collider(player,walls);
 
-  //debug stuff
-  //checking that correct tiles are colliding
-  //@MATTIE COMMENT OUT WHEN NOT CHECKING
-  // const debugGraphics = this.add.graphics().setAlpha(0.75);
-  // blockedTiles.renderDebug(debugGraphics, {
-  //   tileColor: null,
-  //   collidingTileColor: new Phaser.Display.Color(243,134,48,255),
-  //   faceColor: new Phaser.Display.Color(40,39,37,255)
-  // });
+  // debug stuff
+  // checking that correct tiles are colliding
+  // @MATTIE COMMENT OUT WHEN NOT CHECKING
+  const debugGraphics = this.add.graphics().setAlpha(0.75);
+  walls.renderDebug(debugGraphics, {
+    tileColor: null,
+    collidingTileColor: new Phaser.Display.Color(243,134,48,255),
+    faceColor: new Phaser.Display.Color(40,39,37,255)
+  });
 }
 
 /*****************************************************************************
@@ -155,11 +162,6 @@ function update(time, delta) {
 
   //stops previous movement in the last frame
   player.body.setVelocity(0);
-
-  //stop animation when not moving
-  if (this.cursors.up.isUp && this.cursors.down.isUp && this.cursors.left.isUp && this.cursors.right.isUp) {
-    player.anims.stop();
-  }
 
   //vertical movement
   if (this.cursors.up.isDown) {
@@ -178,6 +180,22 @@ function update(time, delta) {
     player.body.setVelocityX(speed);
     player.anims.play('right',true);
   }
+
+  //stop animation when not moving
+  if (this.cursors.up.isUp && this.cursors.down.isUp && this.cursors.left.isUp && this.cursors.right.isUp) {
+
+      player.anims.stop();
+      currentAnimation = player.anims.currentAnim;
+      //if there is an animation active, find its current frame.
+      //if that current frame is 2 or 4, push it back one frame so that the animation isnt mid-step
+      if (currentAnimation != null) {
+        currentAniFrame = player.anims.currentFrame.index;
+        if (currentAniFrame == 2 || currentAniFrame == 4) {
+          console.log(currentAniFrame);
+          player.anims.previousFrame()
+        }
+      }
+    }
 
   //keep player from moving super fast diagonally
   player.body.velocity.normalize().scale(speed);
