@@ -47,7 +47,7 @@ const config = {
 const game = new Phaser.Game(config);
 
 
-const GRIDSIZE = 16;
+const GRIDSIZE = 8;
 //player variable
 
 let player;
@@ -100,9 +100,10 @@ function create() {
   //const objectsLayer = mainMap.createFromObjects("objectsLayer", "items", {key: 'Type'});
 
 
+
   //PLAYER STUFF
   // set player starting position and have it obey game's physics
-  player = this.physics.add.sprite(50,70,"fyveDown");
+  player = this.physics.add.sprite(72,72,"fyveDown");
 
   //ANIMATIONS
   //walking DOWN
@@ -167,23 +168,41 @@ function update(time, delta) {
   if (this.cursors.up.isDown) {
     player.body.setVelocityY(-speed);
     player.anims.play('up',true);
+    //disable horizontal movment and snap to nearest grid line horizontally
+    player.body.setVelocityX(0);
+    player.x = Math.round(player.x/GRIDSIZE) * GRIDSIZE;
+
   } else if (this.cursors.down.isDown) {
     player.body.setVelocityY(speed);
     player.anims.play('down',true);
+    //disable horizontal movment and snap to nearest grid line horizontally
+    player.body.setVelocityX(0);
+    player.x = Math.round(player.x/GRIDSIZE) * GRIDSIZE;
   }
 
   //horizontal movement
   if (this.cursors.left.isDown) {
     player.body.setVelocityX(-speed);
     player.anims.play('left',true);
+    //disable vertical movement and snap to nearest grid line vertically
+    player.body.setVelocityY(0);
+    player.y = Math.round(player.y/GRIDSIZE) * GRIDSIZE;
+
   } else if (this.cursors.right.isDown) {
     player.body.setVelocityX(speed);
     player.anims.play('right',true);
+    //disable vertical movement and snap to nearest grid line vertically
+    player.body.setVelocityY(0);
+    player.y = Math.round(player.y/GRIDSIZE) * GRIDSIZE;
   }
 
-  //stop animation when not moving
+  //all keys released
   if (this.cursors.up.isUp && this.cursors.down.isUp && this.cursors.left.isUp && this.cursors.right.isUp) {
+      //snap to grid when stopped
+      player.x = Math.round(player.x/GRIDSIZE) * GRIDSIZE;
+      player.y = Math.round(player.y/GRIDSIZE) * GRIDSIZE;
 
+      //stop animations when not moving
       player.anims.stop();
       currentAnimation = player.anims.currentAnim;
       //if there is an animation active, find its current frame.
@@ -201,3 +220,7 @@ function update(time, delta) {
   player.body.velocity.normalize().scale(speed);
 
 }
+
+/*****************************************************************************
+                                  GRID
+******************************************************************************/
