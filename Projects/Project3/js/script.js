@@ -73,6 +73,7 @@ function preload() {
   this.load.spritesheet("fyveUp","assets/sprites/fyve/up/fyveUpSheet.png",{frameWidth:16,frameHeight:16});
   this.load.spritesheet("fyveLeft","assets/sprites/fyve/left/fyveLeftSheet.png",{frameWidth:16,frameHeight:16});
   this.load.spritesheet("fyveRight","assets/sprites/fyve/right/fyveRightSheet.png",{frameWidth:16,frameHeight:16});
+  this.load.spritesheet("cityTilesSprite", "assets/images/cityTiles.png", {frameWidth:16,frameHeight:16});
 }
 
 /*****************************************************************************
@@ -96,8 +97,9 @@ function create() {
   const abovePlayer = mainMap.createStaticLayer("abovePlayer",indoorTileset,0,0);
   walls.setCollisionByProperty({solid:true});
 
-
-  //const objectsLayer = mainMap.createFromObjects("objectsLayer", "items", {key: 'Type'});
+  //object layers from tiled
+  let doorDarkness = mainMap.createFromObjects("doorDarkness", 715, { key: 'cityTilesSprite', frame: 209 }, );
+  //let rightDoor = mainMap.createFromObjects("doors",914, { key: 'cityTiles'})
 
 
 
@@ -147,12 +149,12 @@ function create() {
   // debug stuff
   // checking that correct tiles are colliding
   // @MATTIE COMMENT OUT WHEN NOT CHECKING
-  const debugGraphics = this.add.graphics().setAlpha(0.75);
-  walls.renderDebug(debugGraphics, {
-    tileColor: null,
-    collidingTileColor: new Phaser.Display.Color(243,134,48,255),
-    faceColor: new Phaser.Display.Color(40,39,37,255)
-  });
+  // const debugGraphics = this.add.graphics().setAlpha(0.75);
+  // walls.renderDebug(debugGraphics, {
+  //   tileColor: null,
+  //   collidingTileColor: new Phaser.Display.Color(243,134,48,255),
+  //   faceColor: new Phaser.Display.Color(40,39,37,255)
+  // });
 }
 
 /*****************************************************************************
