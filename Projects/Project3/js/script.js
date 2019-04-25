@@ -53,7 +53,7 @@ const GRIDSIZE = 8;
 let player;
   let currentAniFrame;
   let currentAnimation;
-
+  let juanita;
 //max player speed
 let speed = 60;
 
@@ -68,12 +68,22 @@ function preload() {
   this.load.image("cityTiles", "assets/images/cityTiles.png");
   this.load.tilemapTiledJSON("mainMap","assets/tilemaps/mainMap.json");
 
+//load objects (png spritesheets)
+  this.load.spritesheet("darkness","assets/sprites/interactives/darkness.png",{frameWidth:16,frameHeight:16});
+  this.load.spritesheet("elevatorDoor","assets/sprites/interactives/elevatorDoor.png",{frameWidth:32,frameHeight:32});
+  this.load.spritesheet("panel","assets/sprites/interactives/panel.png",{frameWidth:16,frameHeight:16});
+  this.load.spritesheet("piano","assets/sprites/interactives/piano.png",{frameWidth:32,frameHeight:16});
+  this.load.spritesheet("singleTileInteractables","assets/sprites/interactives/singleTileInteractables.png",{frameWidth:16,frameHeight:16});
+  this.load.spritesheet("stove","assets/sprites/interactives/stove.png",{frameWidth:16,frameHeight:16});
+  this.load.spritesheet("trash","assets/sprites/interactives/trash.png",{frameWidth:16,frameHeight:16});
+
   //load player sprites
   this.load.spritesheet("fyveDown","assets/sprites/fyve/down/fyveDownSheet.png",{frameWidth:16,frameHeight:16});
   this.load.spritesheet("fyveUp","assets/sprites/fyve/up/fyveUpSheet.png",{frameWidth:16,frameHeight:16});
   this.load.spritesheet("fyveLeft","assets/sprites/fyve/left/fyveLeftSheet.png",{frameWidth:16,frameHeight:16});
   this.load.spritesheet("fyveRight","assets/sprites/fyve/right/fyveRightSheet.png",{frameWidth:16,frameHeight:16});
   this.load.spritesheet("cityTilesSprite", "assets/images/cityTiles.png", {frameWidth:16,frameHeight:16});
+  this.load.spritesheet("juaniIdle","assets/sprites/friends/juaniIdle.png", {frameWidth:16,frameHeight:16});
 }
 
 /*****************************************************************************
@@ -98,14 +108,24 @@ function create() {
   walls.setCollisionByProperty({solid:true});
 
   //object layers from tiled
-  let doorDarkness = mainMap.createFromObjects("doorDarkness", 715, { key: 'cityTilesSprite', frame: 209 }, );
-  //let rightDoor = mainMap.createFromObjects("doors",914, { key: 'cityTiles'})
+  let elevatorPanel = mainMap.createFromObjects("elevatorPanel", 1525, { key: 'panel' } );
+  let doorDarkness = mainMap.createFromObjects("doorDarkness", 1523, { key: 'darkness' } );
+  let elevatorDoor = mainMap.createFromObjects("doors", 1524, { key: 'elevatorDoor' } );
+  let paintings = mainMap.createFromObjects("paintings", 'smallBlue', { key: 'singleTileInteractables' ,frame: 9} );
+  let plants = mainMap.createFromObjects("plants", 1547, { key: 'singleTileInteractables',frame: (1,20) }  );
+  let bed = mainMap.createFromObjects("bed", 1535, { key: 'singleTileInteractables', frame: 8} );
+  let bucket = mainMap.createFromObjects("bucket", 1544, { key: 'singleTileInteractables', frame: 17 } );
+  let piano = mainMap.createFromObjects("piano", 1526, { key: 'piano' } );
 
 
 
   //PLAYER STUFF
   // set player starting position and have it obey game's physics
   player = this.physics.add.sprite(72,72,"fyveDown");
+
+  //NPCS/FRIENDS
+  //set npc locations
+  juanita = this.add.sprite(288,112,"juaniIdle");
 
   //ANIMATIONS
   //walking DOWN
@@ -137,6 +157,13 @@ function create() {
     key: 'right',
     frames:this.anims.generateFrameNumbers("fyveRight",{start:0, end:3}),
     frameRate: 10,
+    repeat:-1
+  });
+
+  //juanita idle
+  this.anims.create({
+    frames: this.anims.generateFrameNumbers("juaniIdle", {start:0,end:5}),
+    frameRate: 8,
     repeat:-1
   });
 
@@ -217,6 +244,9 @@ function update(time, delta) {
         }
       }
     }
+
+  //keep idle animations going
+  this.anims.play('juaniIdle',juanita);
 
   //keep player from moving super fast diagonally
   player.body.velocity.normalize().scale(speed);
