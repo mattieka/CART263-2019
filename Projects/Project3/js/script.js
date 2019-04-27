@@ -51,9 +51,17 @@ const GRIDSIZE = 8;
 //player variable
 
 let player;
-  let currentAniFrame;
-  let currentAnimation;
-  let juanita;
+let currentAniFrame;
+let currentAnimation;
+
+//friends' (NPC) variables
+let friends;
+let juanita;
+let dudes;
+let ereth;
+let phor;
+let ceese;
+
 //max player speed
 let speed = 60;
 
@@ -82,8 +90,14 @@ function preload() {
   this.load.spritesheet("fyveUp","assets/sprites/fyve/up/fyveUpSheet.png",{frameWidth:16,frameHeight:16});
   this.load.spritesheet("fyveLeft","assets/sprites/fyve/left/fyveLeftSheet.png",{frameWidth:16,frameHeight:16});
   this.load.spritesheet("fyveRight","assets/sprites/fyve/right/fyveRightSheet.png",{frameWidth:16,frameHeight:16});
-  this.load.spritesheet("cityTilesSprite", "assets/images/cityTiles.png", {frameWidth:16,frameHeight:16});
-  this.load.spritesheet("juaniIdle","assets/sprites/friends/juaniIdle.png", {frameWidth:16,frameHeight:16});
+  //this.load.spritesheet("cityTilesSprite", "assets/images/cityTiles.png", {frameWidth:16,frameHeight:16});
+
+  //load npc sprites
+  this.load.spritesheet("juaniIdle","assets/sprites/friends/juaniIdle.png", {frameWidth:16, frameHeight:16});
+  this.load.spritesheet("dudesIdle","assets/sprites/friends/dudesIdle.png",{frameWidth:32,frameHeight:32});
+  this.load.spritesheet("erethIdle","assets/sprites/friends/erethIdle.png",{frameWidth:16,frameHeight:16});
+  this.load.spritesheet("phorIdle","assets/sprites/friends/zephoryaIdle.png", {frameWidth:16, frameHeight:32});
+  this.load.spritesheet("ceeseIdle","assets/sprites/friends/ceeseIdle.png",{frameWidth:16,frameHeight:16});
 }
 
 /*****************************************************************************
@@ -105,14 +119,14 @@ function create() {
   const walls = mainMap.createStaticLayer("walls", cityTileset,0,0);
   const belowPlayer = mainMap.createStaticLayer("belowPlayer",indoorTileset,0,0);
   const abovePlayer = mainMap.createStaticLayer("abovePlayer",indoorTileset,0,0);
-  walls.setCollisionByProperty({solid:true});
+
 
   //object layers from tiled
   let elevatorPanel = mainMap.createFromObjects("elevatorPanel", 1525, { key: 'panel' } );
   let doorDarkness = mainMap.createFromObjects("doorDarkness", 1523, { key: 'darkness' } );
   let elevatorDoor = mainMap.createFromObjects("doors", 1524, { key: 'elevatorDoor' } );
   let paintings = mainMap.createFromObjects("paintings", 'smallBlue', { key: 'singleTileInteractables' ,frame: 9} );
-  let plants = mainMap.createFromObjects("plants", 1547, { key: 'singleTileInteractables',frame: (1,20) }  );
+  let plants = mainMap.createFromObjects("plants", 1547, { key: 'singleTileInteractables',frame: (1) }  );
   let bed = mainMap.createFromObjects("bed", 1535, { key: 'singleTileInteractables', frame: 8} );
   let bucket = mainMap.createFromObjects("bucket", 1544, { key: 'singleTileInteractables', frame: 17 } );
   let piano = mainMap.createFromObjects("piano", 1526, { key: 'piano' } );
@@ -125,7 +139,58 @@ function create() {
 
   //NPCS/FRIENDS
   //set npc locations
-  juanita = this.add.sprite(288,112,"juaniIdle");
+  juanita = this.physics.add.sprite(296,120,"juaniIdle");
+  dudes = this.physics.add.sprite(64,160,"dudesIdle");
+  ereth = this.physics.add.sprite(40,56,"erethIdle");
+  phor = this.physics.add.sprite(264,192,"phorIdle");
+  ceese = this.physics.add.sprite(176,56,"ceeseIdle");
+
+  //juanita idle
+  this.anims.create({
+    key: "juanita",
+    frames: this.anims.generateFrameNumbers("juaniIdle", {start:0,end:5}),
+    frameRate: 8,
+    repeat: -1
+  });
+
+  //dudes idle
+  this.anims.create({
+    key:"dudes",
+    frames:this.anims.generateFrameNumbers("dudesIdle",{start:0,end:7}),
+    frameRate:5,
+    repeat:-1
+  });
+
+  //ereth idle
+  this.anims.create({
+    key:"ereth",
+    frames:this.anims.generateFrameNumbers("erethIdle",{start:0,end:7}),
+    frameRate:5,
+    repeat:-1
+  });
+
+  //phor idle
+  this.anims.create({
+    key:"phor",
+    frames:this.anims.generateFrameNumbers("phorIdle",{start:0,end:10}),
+    frameRate: 3,
+    repeat:-1
+  });
+
+  this.anims.create({
+    key:"ceese",
+    frames:this.anims.generateFrameNumbers("ceeseIdle",{start:0,end:7}),
+    frameRate: 7,
+    repeat:-1
+  });
+
+  //grouping
+  friends = this.physics.add.group({
+    immovable:true
+  });
+  friends.addMultiple([juanita,dudes,ereth,phor,ceese]);
+
+  console.log(friends);
 
   //ANIMATIONS
   //walking DOWN
@@ -160,18 +225,15 @@ function create() {
     repeat:-1
   });
 
-  //juanita idle
-  this.anims.create({
-    frames: this.anims.generateFrameNumbers("juaniIdle", {start:0,end:5}),
-    frameRate: 8,
-    repeat:-1
-  });
+
 
   // register arrow keys for controlling character
   this.cursors = this.input.keyboard.createCursorKeys();
 
   // check for collisions
+  this.physics.add.collider(player,friends);
   this.physics.add.collider(player,walls);
+  walls.setCollisionByProperty({solid:true});
 
   // debug stuff
   // checking that correct tiles are colliding
@@ -246,8 +308,13 @@ function update(time, delta) {
     }
 
   //keep idle animations going
-  this.anims.play('juaniIdle',juanita);
+  juanita.anims.play('juanita',true);
+  dudes.anims.play('dudes',true);
+  ereth.anims.play('ereth',true);
+  phor.anims.play('phor',true);
+  ceese.anims.play('ceese',true);
 
+  this.physics.world.collide(player,friends);
   //keep player from moving super fast diagonally
   player.body.velocity.normalize().scale(speed);
 
