@@ -15,13 +15,16 @@ author, and this description to match your project!
                                   CONFIGURATION
 ******************************************************************************/
 
+let screenWidth = 200;
+let screenHeight = 150;
+
 //phaser basic template/configuration
 // indicates what phaser renderer to use , canvas width and height, and where to put it in the DOM
 const config = {
   type: Phaser.AUTO,
-  width: 800,
-  height: 600,
-  zoom: 3,
+  width: screenWidth,
+  height: screenHeight,
+  zoom: 4,
   pixelArt: true,
   parent: "game-container",
   scene: {
@@ -131,8 +134,6 @@ function create() {
   let bucket = mainMap.createFromObjects("bucket", 1544, { key: 'singleTileInteractables', frame: 17 } );
   let piano = mainMap.createFromObjects("piano", 1526, { key: 'piano' } );
 
-
-
   //PLAYER STUFF
   // set player starting position and have it obey game's physics
   player = this.physics.add.sprite(72,72,"fyveDown");
@@ -226,6 +227,9 @@ function create() {
   });
 
 
+  // camera follow player
+  this.cameras.main.setSize(screenWidth,screenHeight);
+  this.cameras.main.startFollow(player);
 
   // register arrow keys for controlling character
   this.cursors = this.input.keyboard.createCursorKeys();
