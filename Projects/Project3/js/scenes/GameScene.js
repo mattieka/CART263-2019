@@ -238,6 +238,7 @@ class GameScene extends Phaser.Scene {
     phor.showDialogue();
     ceese.showDialogue();
 
+    //freeze player movements while speaking to an npc
     if (dialogueSwitch == true) {
       player.anims.play('up',true);
       player.body.setVelocityX(0);
