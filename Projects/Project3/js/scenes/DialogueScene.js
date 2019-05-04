@@ -13,26 +13,18 @@ class DialogueScene extends Phaser.Scene {
     textPosY = screenHeight-dialogueHeight-10
 
     dialogueBox = this.add.rectangle(screenWidth/2, screenHeight-dialogueHeight/2-10,dialogueWidth,dialogueHeight,0x333135)
-    dialogueBox.setVisible(false);
-
     currentDialogue = this.add.bitmapText(textPosX,textPosY,'font','asdfd');
-    currentDialogue.setVisible(false);
-
-
-
   }
 
   update() {
     if (dialogueSwitch == true) {
-      currentDialogue.setText(erethDialogue[0].text);
       dialogueBox.setVisible(true);
       currentDialogue.setVisible(true);
+    }
 
-      //checks speaker
-      if (erethDialogue[0].name == 'ereth') {
-        currentSpeaker = ereth;
-        console.log(currentSpeaker);
-      }
+    if (dialogueSwitch == false) {
+      currentDialogue.setVisible(false);
+      dialogueBox.setVisible(false);
     }
   }
 }

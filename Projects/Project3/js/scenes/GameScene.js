@@ -83,54 +83,26 @@ class GameScene extends Phaser.Scene {
 
     //NPCS/FRIENDS
     //set npc locations
-    juanita = new Friend(this,296,120,"juaniIdle",0,juanitaPortrait,"dialogueIsInactive","juanita");
-    dudes = this.physics.add.sprite(64,160,"dudesIdle");
-    ereth = this.physics.add.sprite(40,56,"erethIdle");
-    phor = this.physics.add.sprite(264,192,"phorIdle");
-    ceese = this.physics.add.sprite(176,56,"ceeseIdle");
+    juanita = new Friend(this,296,120,"juaniIdle",0,juanitaPortrait,"dialogueIsInactive","juanita",8,juanitaDialogue,0);
+    dudes = new Friend (this,64,160,"dudesIdle",0,dudesPortrait,"dialogueIsInactive","dudes",16,dudesDialogue,0);
+    ereth = new Friend (this,40,56,"erethIdle",0,erethPortrait,"dialogueIsInactive","ereth",8,erethDialogue,0);
+    phor = new Friend (this,264,192,"phorIdle",0,phorPortrait,"dialogueIsInactive","phor",16,phorDialogue,0);
+    ceese = new Friend (this,176,56,"ceeseIdle",0,ceesePortrait,"dialogueIsInactive","ceese",8,ceeseDialogue,0);
 
-
-console.log(this.anims);
-    //juanita idle
-
-
-    //dudes idle
-    this.anims.create({
-      key:"dudes",
-      frames:this.anims.generateFrameNumbers("dudesIdle",{start:0,end:7}),
-      frameRate:5,
-      repeat:-1
-    });
-
-    //ereth idle
-    this.anims.create({
-      key:"ereth",
-      frames:this.anims.generateFrameNumbers("erethIdle",{start:0,end:7}),
-      frameRate:5,
-      repeat:-1
-    });
-
-    //phor idle
-    this.anims.create({
-      key:"phor",
-      frames:this.anims.generateFrameNumbers("phorIdle",{start:0,end:10}),
-      frameRate: 3,
-      repeat:-1
-    });
-
-    this.anims.create({
-      key:"ceese",
-      frames:this.anims.generateFrameNumbers("ceeseIdle",{start:0,end:7}),
-      frameRate: 7,
-      repeat:-1
-    });
-
-    //grouping
+    //add all friends to a phaser group also called friends
     friends = this.physics.add.group({
       immovable:true //can't be pushed around by the player
     });
+
     friends.addMultiple([juanita,dudes,ereth,phor,ceese]);
     console.log(friends);
+
+    //add friends' animation from custom class
+    juanita.addAnimation();
+    dudes.addAnimation();
+    ereth.addAnimation();
+    phor.addAnimation();
+    ceese.addAnimation();
 
     //ANIMATIONS (PLAYER)
     //walking DOWN
@@ -165,7 +137,6 @@ console.log(this.anims);
       repeat:-1
     });
 
-
     // camera follow player
     this.cameras.main.setSize(screenWidth,screenHeight);
     this.cameras.main.startFollow(player);
@@ -177,15 +148,6 @@ console.log(this.anims);
     this.physics.add.collider(player,friends);
     this.physics.add.collider(player,walls);
     walls.setCollisionByProperty({solid:true});
-
-
-
-    juanita.addAnimation();
-    //
-    // //install dialogue plugin
-    // this.sys.install('DialogModalPlugin');
-    // console.log(this.sys.dialogModal);
-
 
     // debug stuff
     // checking that correct tiles are colliding
@@ -266,23 +228,37 @@ console.log(this.anims);
     phor.anims.play('phor',true);
     ceese.anims.play('ceese',true);
 
+    //check for player-friend collisions
+    juanita.checkCollision();
+    dudes.checkCollision();
+    ereth.checkCollision();
+    phor.checkCollision();
+    ceese.checkCollision();
+
     //check collisions between player and friends
     this.physics.world.collide(player,friends);
 
-    //keep player from moving super fast diagonally
-    player.body.velocity.normalize().scale(speed);
 
-    if (player.body.hitTest(friends.children.x,friends.children.y+8) && this.cursors.space.isDown && juanita.state=="dialogueIsInactive" ) {
-      currentSpeaker = juanita;
-      currentSpeaker.setState("dialogIsActive");
-      console.log(juanita.state);
-    }
-    else if (player.body.hitTest(ereth.x,ereth.y+8) && this.cursors.space.isDown && ereth.state=="dialogueIsInactive") {
-      console.log("collided with " +player.body.wasTouching);
-      dialogueSwitch = true;
-      ereth.setState("dialogIsActive");
-      console.log(ereth.state);
-    }
+        //show dialgue text
+        juanita.showDialogue();
+        dudes.showDialogue();
+        ereth.showDialogue();
+        phor.showDialogue();
+        ceese.showDialogue();
+
+
+    //
+    // if (player.body.hitTest(friends.children.x,friends.children.y+8) && this.cursors.space.isDown && juanita.state=="dialogueIsInactive" ) {
+    //   currentSpeaker = juanita;
+    //   currentSpeaker.setState("dialogIsActive");
+    //   console.log(juanita.state);
+    // }
+    // else if (player.body.hitTest(ereth.x,ereth.y+8) && this.cursors.space.isDown && ereth.state=="dialogueIsInactive") {
+    //   console.log("collided with " +player.body.wasTouching);
+    //   dialogueSwitch = true;
+    //   ereth.setState("dialogIsActive");
+    //   console.log(ereth.state);
+    // }
 
   }
 }
