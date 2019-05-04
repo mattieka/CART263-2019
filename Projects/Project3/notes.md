@@ -1,11 +1,9 @@
 to do
 - *DONE!* grid-based movement
-- bring in objects
 - *DONE!* bring in npcs
-- dialogue
+- *DONE!* dialogue
 - *DONE!* camera follow
-- sound
-- cleanup. my code is so , SO messy..
+- *DONE!* cleanup. my code is so , SO messy..
 
 
 Phaser 3 Vocabulary

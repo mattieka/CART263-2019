@@ -38,9 +38,6 @@ class GameScene extends Phaser.Scene {
     this.load.spritesheet("ceeseIdle","assets/sprites/friends/ceeseIdle.png",{frameWidth:16,frameHeight:16});
 
 
-    this.load.image("juaniIdleStill","assets/sprites/friends/juaniIdle.png");
-    // //load dialogue plugin
-    // this.load.plugin('DialogModalPlugin',"./js/dialoguePlugin.js");
 
   }
 
@@ -64,30 +61,25 @@ class GameScene extends Phaser.Scene {
     const belowPlayer = mainMap.createStaticLayer("belowPlayer",indoorTileset,0,0);
     const abovePlayer = mainMap.createStaticLayer("abovePlayer",indoorTileset,0,0);
 
-
     //object layers from tiled
     let elevatorPanel = mainMap.createFromObjects("elevatorPanel", 1525, { key: 'panel' } );
     let doorDarkness = mainMap.createFromObjects("doorDarkness", 1523, { key: 'darkness' } );
     let elevatorDoor = mainMap.createFromObjects("doors", 1524, { key: 'elevatorDoor' } );
-    let paintings = mainMap.createFromObjects("paintings", 'smallBlue', { key: 'singleTileInteractables' ,frame: 9} );
-    let plants = mainMap.createFromObjects("plants", 1547, { key: 'singleTileInteractables',frame: (1) }  );
-    let bed = mainMap.createFromObjects("bed", 1535, { key: 'singleTileInteractables', frame: 8} );
-    let bucket = mainMap.createFromObjects("bucket", 1544, { key: 'singleTileInteractables', frame: 17 } );
-    let piano = mainMap.createFromObjects("piano", 1526, { key: 'piano' } );
-
-
 
     //PLAYER STUFF
     // set player starting position and have it obey game's physics
     player = this.physics.add.sprite(72,72,"fyveDown");
 
+
     //NPCS/FRIENDS
+
+
     //set npc locations
-    juanita = new Friend(this,296,120,"juaniIdle",0,juanitaPortrait,"dialogueIsInactive","juanita",8,juanitaDialogue,0);
-    dudes = new Friend (this,64,160,"dudesIdle",0,dudesPortrait,"dialogueIsInactive","dudes",16,dudesDialogue,0);
-    ereth = new Friend (this,40,56,"erethIdle",0,erethPortrait,"dialogueIsInactive","ereth",8,erethDialogue,0);
-    phor = new Friend (this,264,192,"phorIdle",0,phorPortrait,"dialogueIsInactive","phor",16,phorDialogue,0);
-    ceese = new Friend (this,176,56,"ceeseIdle",0,ceesePortrait,"dialogueIsInactive","ceese",8,ceeseDialogue,0);
+    juanita = new Friend(this,296,120,"juaniIdle",0,"dialogueIsInactive","juanita",8,juanitaDialogue,0);
+    dudes = new Friend (this,64,160,"dudesIdle",0,"dialogueIsInactive","dudes",16,dudesDialogue,0);
+    ereth = new Friend (this,40,56,"erethIdle",0,"dialogueIsInactive","ereth",8,erethDialogue,0);
+    phor = new Friend (this,264,192,"phorIdle",0,"dialogueIsInactive","phor",16,phorDialogue,0);
+    ceese = new Friend (this,176,56,"ceeseIdle",0,"dialogueIsInactive","ceese",8,ceeseDialogue,0);
 
     //add all friends to a phaser group also called friends
     friends = this.physics.add.group({
@@ -147,7 +139,11 @@ class GameScene extends Phaser.Scene {
     // check for collisions
     this.physics.add.collider(player,friends);
     this.physics.add.collider(player,walls);
+    this.physics.add.collider(player,abovePlayer);
+    this.physics.add.collider(player,belowPlayer);
     walls.setCollisionByProperty({solid:true});
+    abovePlayer.setCollisionByProperty({solid:true});
+    belowPlayer.setCollisionByProperty({solid:true});
 
     // debug stuff
     // checking that correct tiles are colliding
@@ -235,30 +231,22 @@ class GameScene extends Phaser.Scene {
     phor.checkCollision();
     ceese.checkCollision();
 
+    //show dialogue text
+    juanita.showDialogue();
+    dudes.showDialogue();
+    ereth.showDialogue();
+    phor.showDialogue();
+    ceese.showDialogue();
+
+    if (dialogueSwitch == true) {
+      player.anims.play('up',true);
+      player.body.setVelocityX(0);
+      player.body.setVelocityY(0);
+      player.anims.stop();
+    }
+
     //check collisions between player and friends
     this.physics.world.collide(player,friends);
-
-
-        //show dialgue text
-        juanita.showDialogue();
-        dudes.showDialogue();
-        ereth.showDialogue();
-        phor.showDialogue();
-        ceese.showDialogue();
-
-
-    //
-    // if (player.body.hitTest(friends.children.x,friends.children.y+8) && this.cursors.space.isDown && juanita.state=="dialogueIsInactive" ) {
-    //   currentSpeaker = juanita;
-    //   currentSpeaker.setState("dialogIsActive");
-    //   console.log(juanita.state);
-    // }
-    // else if (player.body.hitTest(ereth.x,ereth.y+8) && this.cursors.space.isDown && ereth.state=="dialogueIsInactive") {
-    //   console.log("collided with " +player.body.wasTouching);
-    //   dialogueSwitch = true;
-    //   ereth.setState("dialogIsActive");
-    //   console.log(ereth.state);
-    // }
 
   }
 }

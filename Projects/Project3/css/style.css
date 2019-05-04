@@ -3,3 +3,6 @@
 This is the style file for this project.
 
 **********************************************/
+.no-close .ui-dialog-titlebar-close {
+  display: none;
+}

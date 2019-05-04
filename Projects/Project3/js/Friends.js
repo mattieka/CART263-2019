@@ -1,7 +1,8 @@
+//friend class. base for all npcs.
+
 class Friend extends Phaser.GameObjects.Sprite {
-  constructor(scene, x, y, texture, frame, portrait,state,name,collisionOffset,dialogueArray,dialogueIndex) {
+  constructor(scene, x, y, texture, frame,state,name,collisionOffset,dialogueArray,dialogueIndex) {
     super(scene,x,y,texture,frame);
-    this.portrait = portrait;
     this.state = state;
     this.name = name;
     this.collisionOffset = collisionOffset;
@@ -9,6 +10,7 @@ class Friend extends Phaser.GameObjects.Sprite {
     this.dialogueIndex = dialogueIndex;
 
     scene.add.existing(this);
+
   }
 
   addAnimation() {
@@ -53,24 +55,41 @@ class Friend extends Phaser.GameObjects.Sprite {
         repeat:-1
       });
     }
+
   }
 
-  initializeState() {
-    this.setState(state);
-  }
-
+  //on collision, dialogue state is active.
   checkCollision() {
     if (player.body.hitTest(this.x,this.y+this.collisionOffset) && this.scene.cursors.space.isDown && this.state=="dialogueIsInactive" && dialogueSwitch == false) {
       this.setState("dialogueIsActive");
       console.log(this.state);
-      currentSpeaker = this;
-      console.log(currentSpeaker.name);
       dialogueSwitch = true;
     }
   }
 
+  //shows dialogue based on who is speaking
   showDialogue() {
+
+    if (friendsSpokenWith >= 5) {
+      $("#ending").show();
+      $("#ending").dialog({
+       dialogClass: "no-close",
+       buttons: [
+       {
+         text: "Restart",
+         click: function() {
+           $( this ).dialog( "close" );
+           window.location.reload(true);
+           friendsSpokenWith = 0;
+         }
+       }
+      ]
+      });
+    }
+
     if (dialogueSwitch == true && this.state == "dialogueIsActive" && this.dialogueIndex < this.dialogueArray.length-1) {
+      currentSpeaker = this.dialogueArray[this.dialogueIndex].name;
+      console.log(currentSpeaker);
       currentDialogue.setText(this.dialogueArray[this.dialogueIndex].text);
 
       if (Phaser.Input.Keyboard.JustDown(this.scene.cursors.space) && this.dialogueIndex <= this.dialogueArray.length-1) {
@@ -80,14 +99,9 @@ class Friend extends Phaser.GameObjects.Sprite {
 
       if (this.dialogueIndex >= this.dialogueArray.length-1) {
         this.setState("dialogueDone");
+        friendsSpokenWith = friendsSpokenWith +1;
         dialogueSwitch = false;
-        console.log(this.state);
-        console.log(dialogueSwitch);
       }
-
     }
-
   }
-
-
 }

@@ -7616,31 +7616,31 @@
   <tile id="232">
    <properties>
     <property name="interactable" type="bool" value="false"/>
-    <property name="solid" type="bool" value="false"/>
+    <property name="solid" type="bool" value="true"/>
    </properties>
   </tile>
   <tile id="233">
    <properties>
     <property name="interactable" type="bool" value="false"/>
-    <property name="solid" type="bool" value="false"/>
+    <property name="solid" type="bool" value="true"/>
    </properties>
   </tile>
   <tile id="234">
    <properties>
     <property name="interactable" type="bool" value="false"/>
-    <property name="solid" type="bool" value="false"/>
+    <property name="solid" type="bool" value="true"/>
    </properties>
   </tile>
   <tile id="235">
    <properties>
     <property name="interactable" type="bool" value="false"/>
-    <property name="solid" type="bool" value="false"/>
+    <property name="solid" type="bool" value="true"/>
    </properties>
   </tile>
   <tile id="236">
    <properties>
     <property name="interactable" type="bool" value="false"/>
-    <property name="solid" type="bool" value="false"/>
+    <property name="solid" type="bool" value="true"/>
    </properties>
   </tile>
   <tile id="237">
@@ -7778,31 +7778,31 @@
   <tile id="259">
    <properties>
     <property name="interactable" type="bool" value="false"/>
-    <property name="solid" type="bool" value="false"/>
+    <property name="solid" type="bool" value="true"/>
    </properties>
   </tile>
   <tile id="260">
    <properties>
     <property name="interactable" type="bool" value="false"/>
-    <property name="solid" type="bool" value="false"/>
+    <property name="solid" type="bool" value="true"/>
    </properties>
   </tile>
   <tile id="261">
    <properties>
     <property name="interactable" type="bool" value="false"/>
-    <property name="solid" type="bool" value="false"/>
+    <property name="solid" type="bool" value="true"/>
    </properties>
   </tile>
   <tile id="262">
    <properties>
     <property name="interactable" type="bool" value="false"/>
-    <property name="solid" type="bool" value="false"/>
+    <property name="solid" type="bool" value="true"/>
    </properties>
   </tile>
   <tile id="263">
    <properties>
     <property name="interactable" type="bool" value="false"/>
-    <property name="solid" type="bool" value="false"/>
+    <property name="solid" type="bool" value="true"/>
    </properties>
   </tile>
   <tile id="264">
@@ -7940,31 +7940,31 @@
   <tile id="286">
    <properties>
     <property name="interactable" type="bool" value="false"/>
-    <property name="solid" type="bool" value="false"/>
+    <property name="solid" type="bool" value="true"/>
    </properties>
   </tile>
   <tile id="287">
    <properties>
     <property name="interactable" type="bool" value="false"/>
-    <property name="solid" type="bool" value="false"/>
+    <property name="solid" type="bool" value="true"/>
    </properties>
   </tile>
   <tile id="288">
    <properties>
     <property name="interactable" type="bool" value="false"/>
-    <property name="solid" type="bool" value="false"/>
+    <property name="solid" type="bool" value="true"/>
    </properties>
   </tile>
   <tile id="289">
    <properties>
     <property name="interactable" type="bool" value="false"/>
-    <property name="solid" type="bool" value="false"/>
+    <property name="solid" type="bool" value="true"/>
    </properties>
   </tile>
   <tile id="290">
    <properties>
     <property name="interactable" type="bool" value="false"/>
-    <property name="solid" type="bool" value="false"/>
+    <property name="solid" type="bool" value="true"/>
    </properties>
   </tile>
   <tile id="291">
@@ -8102,31 +8102,31 @@
   <tile id="313">
    <properties>
     <property name="interactable" type="bool" value="false"/>
-    <property name="solid" type="bool" value="false"/>
+    <property name="solid" type="bool" value="true"/>
    </properties>
   </tile>
   <tile id="314">
    <properties>
     <property name="interactable" type="bool" value="false"/>
-    <property name="solid" type="bool" value="false"/>
+    <property name="solid" type="bool" value="true"/>
    </properties>
   </tile>
   <tile id="315">
    <properties>
     <property name="interactable" type="bool" value="false"/>
-    <property name="solid" type="bool" value="false"/>
+    <property name="solid" type="bool" value="true"/>
    </properties>
   </tile>
   <tile id="316">
    <properties>
     <property name="interactable" type="bool" value="false"/>
-    <property name="solid" type="bool" value="false"/>
+    <property name="solid" type="bool" value="true"/>
    </properties>
   </tile>
   <tile id="317">
    <properties>
     <property name="interactable" type="bool" value="false"/>
-    <property name="solid" type="bool" value="false"/>
+    <property name="solid" type="bool" value="true"/>
    </properties>
   </tile>
   <tile id="318">
@@ -9346,61 +9346,39 @@
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,1135,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,1229,0,0,0,0,0,0,0,0,1094,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,1227,0,0,0,0,0,0,0,0,0,0,0,
+0,1208,0,0,0,0,0,1447,0,0,0,0,0,1516,0,0,0,0,0,0,
+0,1129,0,0,1135,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,1286,1229,0,0,0,0,0,0,0,0,1229,0,0,0,0,0,0,0,0,
+0,1313,0,0,0,0,0,0,1200,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,1229,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,1046,1047,0,0,0,0,0,1228,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,1453,0,0,0,0,0,0,1093,0,0,0,0,0,0,0,0,0,1194,0,
+0,1425,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 </data>
  </layer>
- <objectgroup id="8" name="piano">
-  <object id="27" name="piano" gid="1526" x="48" y="64" width="32" height="16"/>
- </objectgroup>
- <objectgroup id="9" name="bucket">
-  <object id="28" name="bucket" gid="1544" x="288" y="208" width="16" height="16"/>
- </objectgroup>
- <objectgroup id="12" name="bed">
-  <object id="41" name="bed" gid="1535" x="16" y="64" width="16" height="16"/>
- </objectgroup>
  <layer id="4" name="abovePlayer" width="20" height="15">
   <data encoding="csv">
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,1431,1432,1433,0,0,0,0,0,0,0,0,0,
+0,0,1379,0,0,0,0,0,1431,1432,1433,0,1378,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,1276,1277,1053,1380,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,1286,0,0,0,0,0,0,1296,1297,1298,0,0,0,0,0,0,0,0,0,
 0,1313,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,1334,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1457,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,1067,1068,0,0,0,0,0,0,0,0,0,
+0,0,0,1434,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,1435,0,0,0,0,0,0,0,0,0,0,0,0,
+0,1334,0,0,0,0,0,0,0,0,0,0,0,1407,0,1377,0,1457,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1457,0,0,
+0,0,0,0,0,0,0,0,0,1067,1068,0,0,0,0,0,0,1456,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 </data>
  </layer>
- <objectgroup id="10" name="plants">
-  <object id="30" name="pianoPlant" gid="1547" x="80" y="64" width="16" height="16"/>
-  <object id="32" name="tablePlant" gid="1547" x="16" y="170" width="16" height="16"/>
- </objectgroup>
- <objectgroup id="11" name="paintings">
-  <object id="34" name="paintingGreen" gid="1539" x="96" y="64" width="16" height="16"/>
-  <object id="35" name="paintingRed" gid="1540" x="208" y="176" width="16" height="16"/>
-  <object id="36" name="paintingBlue" gid="1541" x="48" y="144" width="16" height="16"/>
-  <object id="37" name="map" gid="1548" x="112" y="160" width="16" height="16"/>
-  <object id="38" name="smallGreen" gid="1536" x="240" y="176" width="16" height="16"/>
-  <object id="39" name="smallRed" gid="1537" x="192" y="32" width="16" height="16"/>
-  <object id="40" name="smallBlue" gid="1538" x="32" y="32" width="16" height="16"/>
- </objectgroup>
  <objectgroup id="7" name="doorDarkness">
   <object id="26" name="darkness" gid="1523" x="258" y="112" width="28" height="28"/>
  </objectgroup>
