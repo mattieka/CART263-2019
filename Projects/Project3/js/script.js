@@ -59,7 +59,7 @@ let portraitPosY;
 let portraitWidth = 64;
 let portraitHeight = 64;
 
-let friendsSpokenWith = 5;
+let friendsSpokenWith = 0;
 
 
 
