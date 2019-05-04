@@ -26,7 +26,7 @@ let currentAniFrame;
 let currentAnimation;
 
 //max player speed
-let speed = 160;
+let speed = 60;
 
 //friends' (NPC) variables
 let friends; //variable for entire group (an array)
@@ -79,7 +79,7 @@ const config = {
   physics: {
     default: "arcade",
     arcade: {
-      debug: true,
+      debug: false,
       gravity: {y:0}
     }
   }
